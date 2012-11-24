@@ -7,7 +7,8 @@ gem 'rails', '3.2.9'
 
 gem 'rails-api'
 
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 
 gem 'pry'
 gem 'awesome_print'
