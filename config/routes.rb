@@ -1,6 +1,10 @@
 SecretrevApi::Application.routes.draw do
   resources :mods, except: :edit
 
+  get '/mods/name/:q' => 'mods#name', :q => /.*/
+  get '/mods/version/:q' => 'mods#version', :q => /.*/
+  get '/mods/author/:q' => 'mods#author', :q => /.*/
+
   root :to => 'mods#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
