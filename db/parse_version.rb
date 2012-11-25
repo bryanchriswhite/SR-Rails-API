@@ -1,4 +1,3 @@
-
 Mod.all.each do |mod|
   match_data = mod.name.match(/\[(?<n>[\d|\w|\.]+)\]/)
   @version = ''
