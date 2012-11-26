@@ -23,4 +23,9 @@ class ModsController < ApplicationController
     @mods = Mod.where "author like ?", "%#{params[:q]}%"
     render json: @mods
   end
+
+  def count
+    @mods = Mod.limit(params[:count]).offset(params[:offset])
+    render json: @mods
+  end
 end
