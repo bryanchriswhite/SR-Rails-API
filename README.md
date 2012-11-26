@@ -36,6 +36,10 @@ _Anywhere there is a `<arbitrary text here>`, it will hence be referred to as a 
 ###Single Mod by ID
 `/mods/<id>`
 
+###Range of Mods
+_Note: `[]` (square brackets) indicate optional parameters_
+`/mods/count/<number of mods to get>/[offset/<number of mods to skip before beginning of range>]`
+
 Searching for Mods
 ------------------
 _All searches are currently performed using an SQL where clause like this: `WHERE <field> like '%<query>%'`
