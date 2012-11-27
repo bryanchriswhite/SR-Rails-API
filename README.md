@@ -42,7 +42,7 @@ _Note: `[]` (square brackets) indicate optional parameters_
 
 Searching for Mods
 ------------------
-_All searches are currently performed using an SQL where clause like this: `WHERE <field> like '%<query>%'`
+_All searches are currently performed using an SQL where clause like this: `WHERE <field> like '%<query>%'`_
 _The use of periods and spaces is permitted in all searches_
 
 ###By Name
@@ -54,3 +54,7 @@ _The use of periods and spaces is permitted in all searches_
 ###By Author Handle
 _Author handles are those of the [ curse ]( http://www.curse.com/ ) user who posted the minecraft forum topic that the mod originated from_
 `/mods/author/<author to search for>`
+
+###How Many Mods?
+_Returns an integer that is the total number of mods in the DB currently_
+`/mods/total`
