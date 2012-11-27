@@ -1,4 +1,5 @@
 SecretrevApi::Application.routes.draw do
+  get '/mods/total' => 'mods#total'
   resources :mods, except: :edit
 
   get '/mods/name/:q' => 'mods#name', :q => /.*/

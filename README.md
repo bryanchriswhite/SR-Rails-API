@@ -19,7 +19,7 @@ Currently a mod has the following schema:
     | author            | varchar |
     | minecraft_version | varchar |
     | forum_url         | varchar |
-    L-----------------------------/
+    \-----------------------------/
 
 Routes
 ------

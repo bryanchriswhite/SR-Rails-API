@@ -28,4 +28,9 @@ class ModsController < ApplicationController
     @mods = Mod.limit(params[:count]).offset(params[:offset])
     render json: @mods
   end
+
+  def total
+    @total = Mod.all.length
+    render json: @total
+  end
 end
