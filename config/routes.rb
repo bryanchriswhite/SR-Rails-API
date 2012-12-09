@@ -1,4 +1,6 @@
 SecretrevApi::Application.routes.draw do
+  resources :categories, except: :edit
+
   get '/mods/total' => 'mods#total'
   resources :mods, except: :edit
 
