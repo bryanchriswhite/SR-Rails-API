@@ -8,6 +8,8 @@ SecretrevApi::Application.routes.draw do
   get '/mods/version/:q' => 'mods#version', :q => /.*/
   get '/mods/author/:q' => 'mods#author', :q => /.*/
   get '/mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
+  get '/categories' => 'categories#index'
+
 
   root :to => 'mods#index'
   # The priority is based upon order of creation:
