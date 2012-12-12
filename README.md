@@ -1,6 +1,6 @@
 Temporary Rails API
 ===================
-###[ Staged on Heroku ]( secretrevelations.herokuapp.com )
+###[ Staged at wiglepedia.org ]( wiglepedia.org )
 
 Getting Mods
 ------------
@@ -8,7 +8,10 @@ _Note: This API will respond to HTTP methods other than GET but is intended only
 Currently the root route returns all mods. This data is encoded in JSON, if the response to any request is a single record, that objec is returned, if it is more than one record the response is an array.
 
 Schema
-------
+======
+
+Mods
+----
 Currently a mod has the following schema:
 
     _______________________________
@@ -21,12 +24,25 @@ Currently a mod has the following schema:
     | forum_url         | varchar |
     \-----------------------------/
 
+Categories
+----------
+Categories have the following schema:
+
+    _______________________________
+    | FIELD             | TYPE    |
+    |-------------------|---------|
+    | name              | string  |
+    \-----------------------------/
+
 Routes
-------
+======
 _A "route" is the part of the URL that follows the hostname; i.e. the hostname is [ secretrevelations.herokuapp.com ]( secretrevelations.herokuapp.com ), `secretrevelations.herokuapp.com/mods` has a route of `/mods`_
 
 ####Tags
 _Anywhere there is a `<arbitrary text here>`, it will hence be referred to as a tag; all tags in this documentation are designed to serve as placeholders for some variable input_
+
+Mods
+----
 
 ###All Mods
 *WARNING:* there are currently upwards of 14,000 records in the DB. If you're running low on memory I don't recommend pointing your browser to this resource as they will be returned as text in your browser
@@ -58,3 +74,9 @@ _Author handles are those of the [ curse ]( http://www.curse.com/ ) user who pos
 ###How Many Mods?
 _Returns an integer that is the total number of mods in the DB currently_
 `/mods/total`
+
+Categories
+----------
+
+###All Categories
+`/categories`
