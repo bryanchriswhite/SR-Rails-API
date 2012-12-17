@@ -1,11 +1,12 @@
 SecretrevApi::Application.routes.draw do
-  resources :categorizations, except: :edit
 
-  get "log_in" => "session#create"
-
-  resources :users, except: :edit
+  namespace :v1 do
+    resources :categorizations, except: :edit
+    resources :users, except: :edit
+  end
 
   resources :categories, except: :edit
+
 
   get '/mods/total' => 'mods#total'
   resources :mods, except: :edit
@@ -18,6 +19,8 @@ SecretrevApi::Application.routes.draw do
 
 
   root :to => 'mods#index'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
