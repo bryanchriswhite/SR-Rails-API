@@ -31,12 +31,31 @@ GEM
     arel (3.0.2)
     awesome_print (1.1.0)
     builder (3.0.4)
+    capybara (2.0.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (~> 2.0)
+      xpath (~> 1.0.0)
+    childprocess (0.3.6)
+      ffi (~> 1.0, >= 1.0.6)
     coderay (1.0.8)
+    database_cleaner (0.9.1)
+    diff-lcs (1.1.3)
     erubis (2.7.0)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
+      railties (>= 3.0.0)
+    ffi (1.1.5)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
     json (1.7.5)
+    libwebsocket (0.1.6)
+      websocket
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -44,6 +63,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.3.7)
+    nokogiri (1.5.5)
     pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
@@ -79,6 +99,23 @@ GEM
     rake (10.0.2)
     rdoc (3.12)
       json (~> 1.4)
+    rspec-core (2.12.0)
+    rspec-expectations (2.12.0)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.12.0)
+    rspec-rails (2.12.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
+    rubyzip (0.9.9)
+    selenium-webdriver (2.26.0)
+      childprocess (>= 0.2.5)
+      libwebsocket (~> 0.1.3)
+      multi_json (~> 1.0)
+      rubyzip
     slop (3.3.3)
     sprockets (2.2.1)
       hike (~> 1.2)
@@ -91,13 +128,20 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.35)
+    websocket (1.0.2)
+    xpath (1.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   awesome_print
+  capybara
+  database_cleaner (>= 0.9.1)
+  factory_girl_rails (>= 4.1.0)
   pg
   pry
   rails (= 3.2.9)
   rails-api
+  rspec-rails (>= 2.11.4)
