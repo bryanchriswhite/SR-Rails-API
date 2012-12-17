@@ -1,4 +1,10 @@
 SecretrevApi::Application.routes.draw do
+  resources :categorizations, except: :edit
+
+  get "log_in" => "session#create"
+
+  resources :users, except: :edit
+
   resources :categories, except: :edit
 
   get '/mods/total' => 'mods#total'
