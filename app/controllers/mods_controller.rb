@@ -6,7 +6,7 @@ class ModsController < ApplicationController
 
   def show
     @mod = Mod.find(params['id'])
-    render json: @mod
+    render json: @mod, callback: params[:callback]
   end
 
   def name

@@ -14,9 +14,9 @@ class V1::CategorizationsController < ApplicationController
     categorization.user_id = params[:user_id]
     categorization.category_id = params[:category_id]
     if categorization.save
-      render text: "OK"
+      head :ok
     else
-      render text: "Not OK"
+      head :bad_request
     end
 
   end
