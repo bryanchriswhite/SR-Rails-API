@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/LiminalSoftware/rails-api.git
+  revision: 241ace475fa7b3ed2f428bd78750d2641a1e604d
+  tag: 0.0.2.5
+  specs:
+    rails-api (0.0.2)
+      actionpack (>= 3.2.0)
+      railties (>= 3.2.0)
+      tzinfo (~> 0.3.31)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,10 +95,6 @@ GEM
       activesupport (= 3.2.9)
       bundler (~> 1.0)
       railties (= 3.2.9)
-    rails-api (0.0.2)
-      actionpack (>= 3.2.0)
-      railties (>= 3.2.0)
-      tzinfo (~> 0.3.31)
     railties (3.2.9)
       actionpack (= 3.2.9)
       activesupport (= 3.2.9)
@@ -143,5 +149,5 @@ DEPENDENCIES
   pg
   pry
   rails (= 3.2.9)
-  rails-api
+  rails-api!
   rspec-rails (>= 2.11.4)
