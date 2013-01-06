@@ -18,7 +18,7 @@ class V1::UsersController < ApplicationController
     rescue
       @response = {status: 400, message: $!.to_s}
     ensure
-      render json: @response, callback: params[:callback]
+      render json: @response, callback: params[:callback], status: @response[:status]
     end
   end
 
