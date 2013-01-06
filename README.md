@@ -4,19 +4,24 @@ Secret Revelations API (work in progress)
 
 ###Versioning
 ####Current Version: v1
-This API is versioned for maintainability. Anywhere where the tag like `<version>` the user-agent should substitute a version (preferably the current, as above).
-Any time a request is made to resource of a version older than the current an alert, warning or error object will be appended to any JSON object returned to the user-agent. This object will look like the following:
-`{<your requested resource>, (alert | warning | error): <message>}`
+This API is versioned for maintainability. Anywhere there is a `<version>` tag, the user-agent should substitute a version (preferably the current, as above).
 
-####Alert / Warning / Error
-An alert is intended to notify the user-agent that a newer version is available
-i.e.: `{<your requested resource>, alert: "a newer version: v2 is available"}`
+####Version Check
+A user-agent may check the current version with this route: `/version`
+A user-agent may also check the status of it's the any version with this route: `/version/<version>`. The response will be a JSON object containing an alert, warning or an error.
 
-A warning is intended to notify the user-agent that the requested version will soon be deprecated
-i.e.: `{<your requested resoure>, warning: "this resource version will be deprecated soon"}`
+#####Alert / Warning / Error
+An alert is intended to notify the user-agent that a newer version is available i.e.:
 
-An error is inteded to notify the user-agent that the requested version IS deprecated and cannot be retrieved
-i.e.: `{<your requested resoure>, error: "this resource version is deprecated, please update"}`
+`{alert: "a newer version: v2 is available"}`
+
+A warning is intended to notify the user-agent that the requested version will soon be deprecated i.e.:
+
+`{warning: "this resource version will be deprecated soon"}`
+
+An error is inteded to notify the user-agent that the requested version IS deprecated and cannot be retrieved i.e.:
+
+`{error: "this resource version is deprecated, please update"}`
 
 ####Tags
 _Anywhere there is a `<arbitrary text here>`, it will hence be referred to as a tag; all tags in this documentation are designed to serve as placeholders for some variable input_
