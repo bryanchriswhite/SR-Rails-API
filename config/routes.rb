@@ -1,21 +1,21 @@
 SecretrevApi::Application.routes.draw do
 
   namespace :v1 do
+    #TODO: implement alert/warning/error system for user-agents accessing old verisons, etc.
     resources :categorizations, except: :edit
     resources :users, except: :edit
+
+    resources :categories, except: :edit
+
+    get 'mods/total' => 'mods#total'
+    resources :mods, except: :edit
+
+    get 'mods/name/:q' => 'mods#name', :q => /.*/
+    get 'mods/version/:q' => 'mods#version', :q => /.*/
+    get 'mods/author/:q' => 'mods#author', :q => /.*/
+    get 'mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
+    get 'categories' => 'categories#index'
   end
-
-  resources :categories, except: :edit
-
-
-  get 'mods/total' => 'mods#total'
-  resources :mods, except: :edit
-
-  get 'mods/name/:q' => 'mods#name', :q => /.*/
-  get 'mods/version/:q' => 'mods#version', :q => /.*/
-  get 'mods/author/:q' => 'mods#author', :q => /.*/
-  get 'mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
-  get 'categories' => 'categories#index'
 
   root :to => 'mods#index'
 

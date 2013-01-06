@@ -2,6 +2,22 @@ Secret Revelations API (work in progress)
 ===================
 ###[ Staged at wiglepedia.org ]( wiglepedia.org )
 
+###Versioning
+####Current Version: v1
+This API is versioned for maintainability. Anywhere where the tag like `<version>` the user-agent should substitute a version (preferably the current, as above).
+Any time a request is made to resource of a version older than the current an alert, warning or error object will be appended to any JSON object returned to the user-agent. This object will look like the following:
+`{<your requested resource>, (alert | warning | error): <message>}`
+
+####Alert / Warning / Error
+An alert is intended to notify the user-agent that a newer version is available
+i.e.: `{<your requested resource>, alert: "a newer version: v2 is available"}`
+
+A warning is intended to notify the user-agent that the requested version will soon be deprecated
+i.e.: `{<your requested resoure>, warning: "this resource version will be deprecated soon"}`
+
+An error is inteded to notify the user-agent that the requested version IS deprecated and cannot be retrieved
+i.e.: `{<your requested resoure>, error: "this resource version is deprecated, please update"}`
+
 ####Tags
 _Anywhere there is a `<arbitrary text here>`, it will hence be referred to as a tag; all tags in this documentation are designed to serve as placeholders for some variable input_
 
@@ -72,14 +88,14 @@ Mods
 ###All Mods
 *WARNING:* there are currently upwards of 14,000 records in the DB. If you're running low on memory I don't recommend pointing your browser to this resource as they will be returned as text in your browser
 
-`/mods`
+`/<version number>/mods`
 
 ###Single Mod by ID
-`/mods/<id>`
+`/<version number>/mods/<id>`
 
 ###Range of Mods
 _Note: `[]` (square brackets) indicate optional parameters_
-`/mods/count/<number of mods to get>/[offset/<number of mods to skip before beginning of range>]`
+`/<version number>/mods/count/<number of mods to get>/[offset/<number of mods to skip before beginning of range>]`
 
 Searching for Mods
 ------------------
@@ -87,21 +103,21 @@ _All searches are currently performed using an SQL where clause like this: `WHER
 _The use of periods and spaces is permitted in all searches_
 
 ###By Name
-`/mods/name/<name to search for>`
+`/<version number>/mods/name/<name to search for>`
 
 ###By Minecraft Version
-`/mods/version/<version to search for>`
+`/<version number>/mods/version/<version to search for>`
 
 ###By Author Handle
 _Author handles are those of the [ curse ]( http://www.curse.com/ ) user who posted the minecraft forum topic that the mod originated from_
-`/mods/author/<author to search for>`
+`/<version number>/mods/author/<author to search for>`
 
 ###How Many Mods?
 _Returns an integer that is the total number of mods in the DB currently_
-`/mods/total`
+`/<version number>/mods/total`
 
 Categories
 ----------
 
 ###All Categories
-`/categories`
+`/<version number>/categories`
