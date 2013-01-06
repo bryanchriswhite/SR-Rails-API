@@ -15,7 +15,7 @@ class V1::UsersController < ApplicationController
       @response = {status: 201, message: 'successfully created user', user: user}
     rescue ActiveRecord::RecordInvalid
       @response = {status: 400, message: $!.to_s, user: user}
-    else
+    rescue
       @response = {status: 400, message: $!.to_s}
     ensure
       render json: @response, callback: params[:callback]
