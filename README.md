@@ -36,7 +36,7 @@ To register a user account with the api submit a request to the `/users` resourc
 The API will consider any request whose email and/or username are already in use invalid. The request must contain email, username and password (nothing more).
 
 #####Example Using Curl:
-`curl -vd "user%5Bemail%5D=test@example.com%40gmail.com&user%5Bpassword_hash%5D=0101713f36fc52cd5a51dd03f43a7e98user%5Busername%5D=tester" http://localhost:3001/v1/users`
+`curl -vd "user%5Bemail%5D=test@example.com%40gmail.com&user%5Bpassword_hash%5D=0101713f36fc52cd5a51dd03f43a7e98&user%5Busername%5D=tester" http://localhost:3001/v1/users`
 
 
 Getting Resources
