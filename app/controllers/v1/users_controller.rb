@@ -9,11 +9,11 @@ class V1::UsersController < ApplicationController
   def create
     user = User.new(params[:user])
     begin user.save!
-      @response = {status: 201, message: 'successfully created user'}
+      @response = {status: 201, message: 'successfully created user', user: current_user}
     rescue ActiveRecord::RecordInvalid
       @response = {status: 400, message: $!.to_s}
     ensure
-      render json: {message: @response}
+      render json: @response
     end
   end
 
