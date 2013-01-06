@@ -1,5 +1,7 @@
 class V1::UsersController < ApplicationController
   before_filter :authenticate, except: :create
+  before_filter :cors_preflight_check, only: :create
+  after_filter :cors_set_access_control_headers, only: :create
 
   def index
     #logs the user in using `before_filter`

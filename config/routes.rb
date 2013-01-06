@@ -4,6 +4,7 @@ SecretrevApi::Application.routes.draw do
     #TODO: implement alert/warning/error system for user-agents accessing old verisons, etc.
     resources :categorizations, except: :edit
     resources :users, except: :edit
+    match 'users' => 'users#create', :constraints => {:method => 'OPTIONS'}
 
     resources :categories, except: :edit
 

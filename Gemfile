@@ -16,6 +16,7 @@ gem 'awesome_print'
 
 
 gem "rspec-rails", ">= 2.11.4", :group => [:development, :test]
+gem "meta_request", group: :development
 gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "capybara"
 gem "factory_girl_rails", ">= 4.1.0", :group => [:development, :test]# To use ActiveModel has_secure_password
