@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :username, :password_hash
   #attr_protected :password_hash
+  has_many :categorizations
 
   validates_presence_of :email, :username, :password_hash
   validates_uniqueness_of :email, :username

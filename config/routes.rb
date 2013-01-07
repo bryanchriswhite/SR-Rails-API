@@ -9,12 +9,15 @@ SecretrevApi::Application.routes.draw do
     resources :categories, except: :edit
 
     get 'mods/total' => 'mods#total'
-    resources :mods, except: :edit
-
     get 'mods/name/:q' => 'mods#name', :q => /.*/
     get 'mods/version/:q' => 'mods#version', :q => /.*/
     get 'mods/author/:q' => 'mods#author', :q => /.*/
     get 'mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
+    get 'mods/uncategorized(/:count)' => 'mods#uncategorized', :count => /\d+/
+    get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
+
+    resources :mods, except: :edit
+
     get 'categories' => 'categories#index'
   end
 

@@ -6,8 +6,16 @@ class V1::ModsController < ApplicationController
     render json: @mods, callback: params[:callback]
   end
 
+  # incomplete returns mods that have < 10 categorzations by any user
+  def incomplete
+    @mods = Mod.where(broken: false).limit(params[:count]).incomplete
+    render json: @mods, callback: params[:callback]
+  end
+
+  # uncategorized returns mod that have not been categorized by a single user
   def uncategorized
-    @mods = Mod.uncategorized.where(broken: false).limit(100)
+    @mods = Mod.uncategorized(current_user.id).where(broken: false).limit(params[:count])
+    render json: @mods, callback: params[:callback]
   end
 
   def show
@@ -18,7 +26,7 @@ class V1::ModsController < ApplicationController
   def broken
     @mod = Mod.find params[:id]
     @mod.broken = true
-    Break.create {user: current_user, mod: @mod}
+    Break.create Hash[user: current_user, mod: @mod]
     @mod.save!
   end
 

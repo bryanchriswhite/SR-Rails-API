@@ -4,7 +4,9 @@ class Mod < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :categorizations
 
-  #scope :uncategorized, all #categorizations.count < 10
+  scope :incomplete, find_by_sql('select * from mods where id not in (select mod_id from categorizations group by mod_id having count(mod_id) > 9)')
 
-  #where categorizations
+  def self.uncategorized user_id
+    where "select mod_id from categorizations group by mod_id where user_id not #{user_id}"
+  end
 end
