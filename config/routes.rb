@@ -1,17 +1,29 @@
 SecretrevApi::Application.routes.draw do
-  resources :categories, except: :edit
 
-  get '/mods/total' => 'mods#total'
-  resources :mods, except: :edit
+  namespace :v1 do
+    #TODO: implement alert/warning/error system for user-agents accessing old verisons, etc.
+    resources :categorizations, except: :edit
+    resources :users, except: :edit
+    match 'users' => 'users#create', :constraints => {:method => 'OPTIONS'}
 
-  get '/mods/name/:q' => 'mods#name', :q => /.*/
-  get '/mods/version/:q' => 'mods#version', :q => /.*/
-  get '/mods/author/:q' => 'mods#author', :q => /.*/
-  get '/mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
-  get '/categories' => 'categories#index'
+    resources :categories, except: :edit
 
+    get 'mods/total' => 'mods#total'
+    get 'mods/name/:q' => 'mods#name', :q => /.*/
+    get 'mods/version/:q' => 'mods#version', :q => /.*/
+    get 'mods/author/:q' => 'mods#author', :q => /.*/
+    get 'mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
+    get 'mods/uncategorized(/:count)' => 'mods#uncategorized', :count => /\d+/
+    get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
+
+    resources :mods, except: :edit
+
+    get 'categories' => 'categories#index'
+  end
 
   root :to => 'mods#index'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

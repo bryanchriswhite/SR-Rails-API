@@ -5,7 +5,8 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'rails-api'
+gem 'rails-api', :git => 'git://github.com/LiminalSoftware/rails-api.git', :tag => "0.0.2.5"
+#gem 'rails-api'
 
 #gem 'sqlite3'
 gem 'pg'
@@ -14,7 +15,11 @@ gem 'pry'
 gem 'awesome_print'
 
 
-# To use ActiveModel has_secure_password
+gem "rspec-rails", ">= 2.11.4", :group => [:development, :test]
+gem "meta_request", group: :development
+gem "database_cleaner", ">= 0.9.1", :group => :test
+gem "capybara"
+gem "factory_girl_rails", ">= 4.1.0", :group => [:development, :test]# To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON

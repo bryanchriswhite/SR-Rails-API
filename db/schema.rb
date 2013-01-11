@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209025703) do
+ActiveRecord::Schema.define(:version => 20130107023717) do
+
+  create_table "api_keys", :force => true do |t|
+    t.string   "access_token"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "breaks", :force => true do |t|
+    t.string   "user_id"
+    t.string   "mod_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,13 +39,31 @@ ActiveRecord::Schema.define(:version => 20121209025703) do
     t.integer "mod_id"
   end
 
+  create_table "categorizations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "mod_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "mods", :force => true do |t|
     t.string   "name"
     t.string   "minecraft_version"
     t.string   "forum_url"
     t.string   "author"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "broken",            :default => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "email"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end
