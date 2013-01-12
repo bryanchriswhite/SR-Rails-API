@@ -1,5 +1,10 @@
 SecretrevApi::Application.routes.draw do
 
+  resources :challenges, except: :edit
+
+  resources :challenges
+
+
   namespace :v1 do
     #TODO: implement alert/warning/error system for user-agents accessing old verisons, etc.
     resources :categorizations, except: :edit
@@ -17,6 +22,8 @@ SecretrevApi::Application.routes.draw do
     get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
 
     resources :mods, except: :edit
+    get 'challenge' => 'challenge#random'
+    post 'challenge' => 'challenge#check'
 
     get 'categories' => 'categories#index'
   end
