@@ -1,23 +1,36 @@
 require 'spec_helper'
 
-describe ChallengesController do
+describe V1::ChallengesController do
 
-  describe "#random" do
+  describe "GET #random" do
     before :each do
 
     end
 
     it "should create a session" do
-      session[:challenge_id].should_not be blank?
+      pending
+      session[:challenge_id].blank?.should_not be true
     end
     it "should return a random challenge" do
-      pending
+      challenges = FactoryGirl.create_list :challenge, 20
+      random_challenge_ids = []
+      (1..3).each do |count|
+        get :challenge
+
+        current_id = assigns(:challenge).id
+
+        if random_challenge_ids.find(current_id)
+          fail
+        end
+
+        random_challenge_ids << current_id
+      end
     end
   end
 
-  describe "#check" do
+  describe "POST #check" do
     it "should require that a session exist" do
-      session[:challenge_id].should_not be blank?
+      session[:challenge_id].blank?.should_not be true
     end
 
     it "should accept a response" do
