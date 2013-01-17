@@ -12,10 +12,14 @@ class V1::ModsController < ApplicationController
     render json: @mods, callback: params[:callback]
   end
 
-  # uncategorized returns mod that have not been categorized by a single user
+  # uncategorized returns incomplete if current_user doesn't exist, otherwise returns mods not categorized by current_user
   def uncategorized
-    @mods = Mod.uncategorized(current_user.id).where(broken: false).limit(params[:count])
-    render json: @mods, callback: params[:callback]
+    if current_user
+      @mods = Mod.uncategorized(current_user.id).where(broken: false).limit(params[:count])
+      render json: @mods, callback: params[:callback]
+    else
+      incomplete
+    end
   end
 
   def show

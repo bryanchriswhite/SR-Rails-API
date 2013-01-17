@@ -7,14 +7,13 @@ class ApplicationController < ActionController::API
 
   def authenticate
     authenticate_or_request_with_http_digest(REALM) do |username|
-      user = User.find_by_username(username)
-      unless user
+      @user = User.find_by_username(username)
+      unless @user
         render json: {status: 401, message: 'Access Denied'}, status: 401
-        return
       end
-      session[:user_id] = user.id
-      user.password_hash
+      @user.password_hash
     end
+    @user ? session[:user_id] = @user.id : nil
   end
 
   def current_user
