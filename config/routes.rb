@@ -15,6 +15,7 @@ SecretrevApi::Application.routes.draw do
     get 'mods/author/:q' => 'mods#author', :q => /.*/
     get 'mods/count/:count(/offset/:offset)' => 'mods#count', :count => /\d+/, :offset => /\d+/
     get 'mods/uncategorized(/:count)' => 'mods#uncategorized', :count => /\d+/
+    match 'mods/uncategorized(/:count)' => 'mods#uncategorized', :constraints => {:method => 'OPTIONS'}
     get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
 
     resources :mods, except: :edit

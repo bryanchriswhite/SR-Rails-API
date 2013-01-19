@@ -1,5 +1,7 @@
 class V1::ModsController < ApplicationController
   before_filter :authenticate, only: :broken
+  before_filter :cors_preflight_check, only: :uncategorized
+  after_filter :cors_set_access_control_headers, only: :uncategorized
 
   def index
     @mods = Mod.all
@@ -14,6 +16,7 @@ class V1::ModsController < ApplicationController
 
   # uncategorized returns incomplete if current_user doesn't exist, otherwise returns mods not categorized by current_user
   def uncategorized
+    session[:hello_from_rails_api] = 'bananas125'
     if current_user
       @mods = Mod.uncategorized(current_user.id).where(broken: false).limit(params[:count])
       render json: @mods, callback: params[:callback]
