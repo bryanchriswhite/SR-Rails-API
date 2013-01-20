@@ -1,5 +1,10 @@
 SecretrevApi::Application.routes.draw do
 
+  resources :challenges, except: :edit
+
+  resources :challenges
+
+
   namespace :v1 do
     #TODO: implement alert/warning/error system for user-agents accessing old verisons, etc.
     resources :categorizations, except: :edit
@@ -17,8 +22,12 @@ SecretrevApi::Application.routes.draw do
     get 'mods/uncategorized(/:count)' => 'mods#uncategorized', :count => /\d+/
     match 'mods/uncategorized(/:count)' => 'mods#uncategorized', :constraints => {:method => 'OPTIONS'}
     get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
+    #this should be post but because of jsonp we are forced to use get
+    get 'mods/:id/broken' => 'mods#broken', :id => /\d+/
 
     resources :mods, except: :edit
+    get 'challenge' => 'challenge#random'
+    post 'challenge' => 'challenge#check'
 
     get 'categories' => 'categories#index'
   end
