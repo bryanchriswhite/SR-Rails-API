@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(:version => 20130112015302) do
   end
 
   create_table "breaks", :force => true do |t|
-    t.string   "user_id"
-    t.string   "mod_id"
+    t.integer  "user_id"
+    t.integer  "mod_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

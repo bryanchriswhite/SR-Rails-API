@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate
-    session[:test] = 'monkeys789'
+    #session[:test] = 'monkeys789'
     authenticate_or_request_with_http_digest(REALM) do |username|
       @user = User.find_by_username(username)
       unless @user

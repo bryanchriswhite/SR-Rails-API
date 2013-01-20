@@ -22,8 +22,8 @@ SecretrevApi::Application.routes.draw do
     get 'mods/uncategorized(/:count)' => 'mods#uncategorized', :count => /\d+/
     match 'mods/uncategorized(/:count)' => 'mods#uncategorized', :constraints => {:method => 'OPTIONS'}
     get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
-    #this should be post but because of jsonp we are forced to use get
-    get 'mods/:id/broken' => 'mods#broken', :id => /\d+/
+    match 'mods/:id/break' => 'mods#break', :id => /\d+/, :constraints => {:method => 'OPTIONS'}
+    post 'mods/:id/break' => 'mods#break', :id => /\d+/
 
     resources :mods, except: :edit
     get 'challenge' => 'challenge#random'

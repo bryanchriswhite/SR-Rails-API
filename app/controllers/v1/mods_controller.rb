@@ -1,7 +1,20 @@
 class V1::ModsController < ApplicationController
-  before_filter :authenticate, only: :broken
-  before_filter :cors_preflight_check, only: :uncategorized
-  after_filter :cors_set_access_control_headers, only: :uncategorized
+  #before_filter :authenticate, only: :break
+  #before_filter :set_cache_buster, only: :uncategorized
+  before_filter only: :break do |controller|
+    cors_preflight_check
+    unless controller.request.method == 'OPTIONS'
+      authenticate
+    end
+  end
+  before_filter :cors_preflight_check, only: [:uncategorized, :break, :show]
+  after_filter :cors_set_access_control_headers, only: [:uncategorized, :break, :show]
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 
   def index
     @mods = Mod.all
@@ -10,16 +23,16 @@ class V1::ModsController < ApplicationController
 
   # incomplete returns mods that have < 10 categorzations by any user
   def incomplete
-    @mods = Mod.broken_by_democracy.limit(params[:count]).incomplete
+    @mods = Mod.not_broken_by_democracy.limit(params[:count]).incomplete
     render json: @mods, callback: params[:callback]
   end
 
   # uncategorized returns incomplete if current_user doesn't exist, otherwise returns mods not categorized by current_user
   def uncategorized
 
-    session[:hello_from_rails_api] = 'bananas125'
+    #session[:hello_from_rails_api] = 'bananas125'
     if current_user
-      @mods = Mod.uncategorized(current_user.id).broken_by_me(current_user.id).limit(params[:count])
+      @mods = Mod.uncategorized(current_user.id).not_broken_by_me(current_user.id).limit(params[:count])
       render json: @mods, callback: params[:callback]
     else
       incomplete
@@ -31,11 +44,26 @@ class V1::ModsController < ApplicationController
     render json: @mod, callback: params[:callback]
   end
 
+  # TODO: reserved for future admin use!!!
   def broken
     @mod = Mod.find params[:id]
     @mod.broken = true
-    Break.create Hash[user: current_user, mod: @mod]
+    #Break.create Hash[user: current_user, mod: @mod]
     @mod.save!
+  end
+
+  def break
+    @mod = Mod.find params[:id]
+    @mod.breaks.new user_id: current_user.id
+    begin @mod.save!
+      @response = {status: 201, message: 'successfully created break', resource: @mod}
+    rescue ActiveRecord::RecordInvalid
+      @response = {status: 400, message: "You've already flagged this mod as broken", resource: @mod}
+    rescue
+      @response = {status: 400, message: $!.to_s, resource: @mod}
+    ensure
+      render json: @response, status: @response[:status]
+    end
   end
 
   def name
