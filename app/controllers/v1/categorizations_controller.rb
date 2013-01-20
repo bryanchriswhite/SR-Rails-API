@@ -1,7 +1,6 @@
 class V1::CategorizationsController < ApplicationController
   #before_filter :cors_preflight_check, only: :create
   before_filter do |controller|
-    binding.pry
     cors_preflight_check
     unless controller.request.method == 'OPTIONS'
       authenticate
@@ -14,7 +13,6 @@ class V1::CategorizationsController < ApplicationController
   end
 
   def create
-    binding.pry
     params[:categorization][:category_ids].each do |category_id|
       hash = {mod_id: params[:categorization][:mod_id], user_id: current_user.id, category_id: category_id}
       categorization = Categorization.new hash

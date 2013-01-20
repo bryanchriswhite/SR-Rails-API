@@ -10,15 +10,16 @@ class V1::ModsController < ApplicationController
 
   # incomplete returns mods that have < 10 categorzations by any user
   def incomplete
-    @mods = Mod.where(broken: false).limit(params[:count]).incomplete
+    @mods = Mod.broken_by_democracy.limit(params[:count]).incomplete
     render json: @mods, callback: params[:callback]
   end
 
   # uncategorized returns incomplete if current_user doesn't exist, otherwise returns mods not categorized by current_user
   def uncategorized
+
     session[:hello_from_rails_api] = 'bananas125'
     if current_user
-      @mods = Mod.uncategorized(current_user.id).where(broken: false).limit(params[:count])
+      @mods = Mod.uncategorized(current_user.id).broken_by_me(current_user.id).limit(params[:count])
       render json: @mods, callback: params[:callback]
     else
       incomplete

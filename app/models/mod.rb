@@ -5,8 +5,13 @@ class Mod < ActiveRecord::Base
   has_many :categorizations
 
   scope :incomplete, where('id not in (select mod_id from categorizations group by mod_id having count(mod_id) > 9)')
+  scope :broken_by_democracy, where('id not in (select mod_id from categorizations group by mod_id having count(mod_id) > 9)')
 
   def self.uncategorized user_id
-    where "id not in (select mod_id from categorizations where user_id != #{user_id} group by mod_id)"
+    where "id not in (select mod_id from categorizations where user_id = #{user_id} group by mod_id)"
+  end
+
+  def self.uncategorized user_id
+    where "id not in (select mod_id from categorizations where user_id = #{user_id} group by mod_id)"
   end
 end
