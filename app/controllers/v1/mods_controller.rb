@@ -42,9 +42,9 @@ class V1::ModsController < ApplicationController
   def available?
     if current_user
       unless Mod.uncategorized(current_user.id).not_broken_by_me(current_user.id).where(id: params[:id]).blank?;
-        render json: true
+        render json: true, callback: params[:callback]
       else
-        render json: false, status: 400
+        render json: false, status: 400, callack: params[:callback]
       end
     end
   end
