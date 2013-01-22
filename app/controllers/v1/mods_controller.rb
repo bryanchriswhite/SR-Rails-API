@@ -39,12 +39,21 @@ class V1::ModsController < ApplicationController
     end
   end
 
+  def available?
+    if current_user
+      if Mod.uncategorized(current_user).not_broken_by_me(current_user).where(id: params[:id]);
+        render json: true
+      else
+        render json: false, status: 400
+      end
+    end
+  end
+
   def show
     @mod = Mod.find params[:id]
     render json: @mod, callback: params[:callback]
   end
 
-  # TODO: reserved for future admin use!!!
   def broken
     @mod = Mod.find params[:id]
     @mod.broken = true
@@ -55,7 +64,8 @@ class V1::ModsController < ApplicationController
   def break
     @mod = Mod.find params[:id]
     @mod.breaks.new user_id: current_user.id
-    begin @mod.save!
+    begin
+      @mod.save!
       @response = {status: 201, message: 'successfully created break', resource: @mod}
     rescue ActiveRecord::RecordInvalid
       @response = {status: 400, message: "You've already flagged this mod as broken", resource: @mod}
