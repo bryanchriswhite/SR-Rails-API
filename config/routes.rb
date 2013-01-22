@@ -24,7 +24,7 @@ SecretrevApi::Application.routes.draw do
     get 'mods/incomplete(/:count)' => 'mods#incomplete', :count => /\d+/
     match 'mods/:id/break' => 'mods#break', :id => /\d+/, :constraints => {:method => 'OPTIONS'}
     post 'mods/:id/break' => 'mods#break', :id => /\d+/
-    get 'mods/available/:user_id' => 'mods#available?', :user_id => /\d+/
+    get 'mods/available/:id' => 'mods#available?', :id => /\d+/
 
     resources :mods, except: :edit
     get 'challenge' => 'challenge#random'
