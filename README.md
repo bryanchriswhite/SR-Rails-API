@@ -1,6 +1,6 @@
 Secret Revelations API (work in progress)
 ===================
-###[ Staged at wiglepedia.org ]( wiglepedia.org )
+###[ Staged at categorize.bryanchriswhite.com ]( http://categorize.bryanchriswhite.com )
 
 ###Versioning
 ####Current Version: v1
